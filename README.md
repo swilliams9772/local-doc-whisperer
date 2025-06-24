@@ -1,282 +1,188 @@
-# 🧠 Local Doc-Whisperer
+# 🧠 Doc-Whisperer
 
-A tiny Python CLI that digests any PDF, text file, or Markdown note you drop into a folder, asks Claude 4 for a concise summary plus three flash-card questions, and stores both the embeddings and the AI output in a lightweight ChromaDB vector database so you can later ask follow-up questions offline.
+> **Enhanced Multi-Model AI Document Analysis Platform with Modern 2025 UI/UX Design**
 
-![Demo](https://img.shields.io/badge/Status-Ready%20to%20Use-green) ![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![License](https://img.shields.io/badge/License-MIT-yellow)
+[![GitHub stars](https://img.shields.io/github/stars/swilliams9772/local-doc-whisperer?style=social)](https://github.com/swilliams9772/local-doc-whisperer/stargazers)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Why This Project?
+Doc-Whisperer is a cutting-edge document analysis platform that combines the power of AI language models (Claude & OpenAI) with a stunning modern web interface. Built with glassmorphism design principles and 2025 UI/UX trends, it offers an intuitive and beautiful way to interact with your documents.
 
-### Perfect First Project for AI Development
+## ✨ Key Features
 
-- **Single-script simplicity**: Everything runs from one `main.py`; the only external service is the Anthropic HTTPS endpoint
-- **Long-context proof-point**: Claude's 200k-token window means you can feed entire research papers in one go
-- **Local privacy & speed**: Storing vectors in ChromaDB keeps all embeddings on disk; only raw text goes to Claude
-- **Future-proof with MCP**: Can be upgraded to a full Model Context Protocol endpoint later
+### 🎨 **Modern 2025 UI/UX Design**
+- **Glassmorphism Effects**: Beautiful frosted glass cards with backdrop blur
+- **Responsive Grid Layout**: Advanced CSS Grid with mobile-first design
+- **Smooth Animations**: Micro-interactions and seamless transitions
+- **Professional Typography**: Inter font family with perfect spacing
+- **Animated Statistics**: Live counting animations for engagement
+- **Modern Form Controls**: Glass-style inputs with floating labels
 
-## 🏗️ Architecture
+### 🤖 **AI-Powered Analysis**
+- **Multi-Model Support**: Claude (Anthropic) and OpenAI GPT integration
+- **Document Ingestion**: Automatic processing and vectorization
+- **Intelligent Q&A**: Context-aware question answering
+- **Multiple Templates**: Research, Educational, Business, and Creative analysis modes
+- **Vector Database**: ChromaDB integration for efficient document retrieval
 
-```
-┌───────────────┐        ┌───────────────┐        ┌───────────────────────┐
-│  Drop Zone    │──TXT──▶│ Chunker &     │──JSON─▶│ Claude 4 API (stream) │
-│  /docs_in     │        │ Embed/Store   │◀─EMB──│  (summary + quiz)      │
-└───────────────┘        └───────────────┘        └───────────────┬───────┘
-                                          │ markdown output       │
-                                          ▼                       ▼
-                               local_chroma.db            summaries/*.md
-```
+### 🛠 **Technical Excellence**
+- **Python Backend**: Clean, maintainable HTTP server implementation
+- **Real-time Updates**: Live statistics and document library updates
+- **Error Handling**: Comprehensive error states with user-friendly feedback
+- **Accessibility**: WCAG compliant with keyboard navigation support
+- **Performance**: Optimized animations and efficient API calls
 
 ## 🚀 Quick Start
 
-### 1. Prerequisites
-
+### Prerequisites
 - Python 3.8+
-- [Anthropic API key](https://docs.anthropic.com/en/docs/get-started) (get one from the Anthropic Console)
+- Virtual environment (recommended)
+- API keys for Claude or OpenAI
 
-### 2. Installation
+### Installation
 
-```bash
-# Clone or download this project
-git clone <your-repo-url>
-cd local-doc-whisperer
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 3. Configuration
-
-```bash
-# Copy the example environment file
-cp env.example .env
-
-# Edit .env and add your Anthropic API key
-# ANTHROPIC_API_KEY=your_api_key_here
-```
-
-### 4. Usage
-
-#### Ingest Documents
-
-```bash
-# Process a single document
-python main.py ingest docs_in/my_paper.pdf
-
-# Process all documents in a directory
-python main.py ingest docs_in/
-
-# Process recursively through subdirectories
-python main.py ingest docs_in/ --recursive
-```
-
-#### Ask Questions
-
-```bash
-# Ask a specific question
-python main.py ask "What are the three key findings?"
-
-# Start interactive session
-python main.py interactive
-
-# List ingested documents
-python main.py list-docs
-```
-
-## 📁 File Structure
-
-```
-local-doc-whisperer/
-├── main.py              # Main application
-├── requirements.txt     # Python dependencies
-├── env.example         # Environment variables template
-├── docs_in/            # Drop documents here for processing
-├── summaries/          # Generated summaries and quizzes (Markdown)
-├── chroma_db/          # Vector database (auto-created)
-└── README.md           # This file
-```
-
-## 🎯 Features
-
-### Document Processing
-- **PDF extraction**: Uses `pdfplumber` for accurate text extraction
-- **Multiple formats**: Supports PDF, TXT, MD, and Markdown files
-- **Smart chunking**: Splits large documents into 3.5k-token chunks with overlap
-- **Metadata tracking**: Preserves source information and page numbers
-
-### AI-Powered Analysis
-- **Intelligent summaries**: 150-word concise summaries using Claude
-- **Quiz generation**: Three Q&A flashcards for self-study
-- **Citation tracking**: Source locations for each answer
-- **JSON structured output**: Consistent, parseable responses
-
-### Vector Search
-- **Local storage**: ChromaDB for fast, offline vector search
-- **Semantic search**: Find relevant chunks using natural language queries
-- **Privacy-first**: No data leaves your machine except API calls to Claude
-- **Persistent database**: Data survives between sessions
-
-### User Experience
-- **Beautiful CLI**: Rich terminal output with colors and progress bars
-- **Interactive mode**: Conversational Q&A sessions
-- **Batch processing**: Handle multiple documents at once
-- **Error handling**: Graceful fallbacks and informative error messages
-
-## 🔧 Command Reference
-
-### Ingest Command
-```bash
-python main.py ingest [PATH] [OPTIONS]
-
-Arguments:
-  PATH    Path to document or directory to process
-
-Options:
-  -r, --recursive    Process directories recursively
-  --help            Show help message
-```
-
-### Ask Command
-```bash
-python main.py ask "Your question here"
-
-# Examples:
-python main.py ask "What are the main conclusions?"
-python main.py ask "How does this relate to previous research?"
-python main.py ask "What methodology was used?"
-```
-
-### Interactive Mode
-```bash
-python main.py interactive
-
-# Special commands in interactive mode:
-# - Type 'list' to see available documents
-# - Type 'quit', 'exit', or 'q' to end session
-# - Ctrl+C to exit
-```
-
-### List Documents
-```bash
-python main.py list-docs
-```
-
-## ⚙️ Configuration
-
-Edit your `.env` file to customize behavior:
-
-```bash
-# Required: Your Anthropic API key
-ANTHROPIC_API_KEY=your_key_here
-
-# Optional: Model selection (default: claude-3-sonnet-20240229)
-DEFAULT_MODEL=claude-3-opus-20240229
-
-# Optional: Vector database location (default: ./chroma_db)
-CHROMA_PERSIST_DIR=./chroma_db
-
-# Optional: Text chunking settings
-CHUNK_SIZE=3500
-CHUNK_OVERLAP=100
-```
-
-## 🔍 Example Workflow
-
-1. **Add documents to process:**
+1. **Clone the repository**
    ```bash
-   # Copy your PDFs/text files to docs_in/
-   cp ~/Downloads/research_paper.pdf docs_in/
-   cp ~/Notes/*.md docs_in/
+   git clone https://github.com/swilliams9772/local-doc-whisperer.git
+   cd local-doc-whisperer
    ```
 
-2. **Ingest them:**
+2. **Set up virtual environment**
    ```bash
-   python main.py ingest docs_in/
-   ```
-   
-   This will:
-   - Extract text from each document
-   - Create vector embeddings
-   - Generate summaries with flashcard questions
-   - Save everything locally
-
-3. **Ask questions:**
-   ```bash
-   python main.py ask "What is the main hypothesis?"
-   
-   # Or start interactive mode
-   python main.py interactive
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-4. **Review summaries:**
-   Check the `summaries/` folder for generated Markdown files with summaries and quiz questions.
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 🚀 Extension Ideas
+4. **Configure API keys**
+   ```bash
+   cp env.example .env
+   # Edit .env file with your API keys
+   ```
 
-Once you have the basic version working, consider these enhancements:
+5. **Run the application**
+   ```bash
+   python web_app.py
+   ```
 
-| Extension | Skills You'll Learn | Implementation Notes |
-|-----------|-------------------|---------------------|
-| **Tool-calling** | JSON schema & argument parsing | Auto-open PDFs when Claude suggests "see appendix" |
-| **MCP wrapper** | HTTP routing, protocol compliance | Let other apps subscribe to your vector store |
-| **GUI dashboard** | Web frameworks | Streamlit app showing summaries & similarity scores |
-| **Auto-scheduler** | File watching, cron jobs | Re-index changed files nightly |
-| **Obsidian sync** | File system APIs | Export to personal knowledge graphs |
-| **Multi-model support** | API abstraction | Compare Claude vs GPT-4 vs local models |
+6. **Open your browser**
+   Navigate to `http://localhost:8000` to experience the modern interface!
 
-## 🐛 Troubleshooting
+## 📱 Interface Preview
 
-### Token Limits
-- Even with 200k context, PDFs >150k tokens may need chunk summarization first
-- Switch from Opus to Sonnet for bulk ingestion to save costs
+The new 2025 UI features:
 
-### Rate Limits
-- Free tier has lower rate limits - add delays between requests if needed
-- Consider upgrading to paid tier for heavy usage
+- **Dashboard**: Live statistics with animated counters
+- **Document Ingestion**: Modern file upload with progress indicators
+- **AI Chat Interface**: Beautiful question/answer cards with metadata
+- **Document Library**: Visual document management with icons
+- **Responsive Design**: Perfect on desktop, tablet, and mobile
 
-### Performance
-- ChromaDB runs fine on CPU for <100k embeddings
-- For larger datasets, consider GPU acceleration or FAISS alternative
+## 🎯 Usage Examples
 
-### Common Issues
+### Web Interface
+1. **Ingest Documents**: Upload your documents using the beautiful drag-and-drop interface
+2. **Ask Questions**: Use the AI-powered Q&A system with real-time responses
+3. **View Analytics**: Monitor your document library with live statistics
+4. **Export Results**: Download analysis results in multiple formats
 
-**"No API key found"**
+### CLI Interface
 ```bash
-# Make sure you've copied env.example to .env and added your key
-cp env.example .env
-# Edit .env with your actual API key
+# Interactive mode
+python main_minimal.py interactive
+
+# Process single document
+python main_enhanced.py process document.pdf --provider claude
+
+# Bulk processing
+python advanced_demo.py --batch-process docs/
 ```
 
-**"No text extracted from PDF"**
-- Some PDFs are image-based and need OCR
-- Try using a different PDF or converting to text first
+## 🏗 Architecture
 
-**"Vector database errors"**
-- Delete `chroma_db/` folder and restart to reset database
-- Check file permissions in the project directory
+```
+Doc-Whisperer/
+├── 🎨 Frontend (Modern UI/UX)
+│   ├── Glassmorphism Design
+│   ├── Responsive Grid Layout
+│   └── Smooth Animations
+├── 🧠 AI Integration
+│   ├── Claude (Anthropic)
+│   ├── OpenAI GPT
+│   └── Multi-Model Support
+├── 📊 Vector Database
+│   ├── ChromaDB Storage
+│   ├── Efficient Retrieval
+│   └── Semantic Search
+└── 🛠 Backend Services
+    ├── HTTP Server
+    ├── Document Processing
+    └── API Endpoints
+```
+
+## 🎨 Design System
+
+The interface follows modern design principles:
+
+- **Color Palette**: Custom CSS properties with glassmorphism effects
+- **Typography**: Inter font family with proper hierarchy
+- **Spacing**: Consistent 8px grid system
+- **Components**: Reusable glass cards and modern buttons
+- **Animations**: 60fps smooth transitions with cubic-bezier easing
+- **Accessibility**: High contrast modes and keyboard navigation
+
+## 🔧 Configuration
+
+### API Providers
+Configure your preferred AI models in `.env`:
+
+```env
+ANTHROPIC_API_KEY=your_claude_key_here
+OPENAI_API_KEY=your_openai_key_here
+```
+
+### Analysis Templates
+Choose from multiple analysis modes:
+- **Research**: Academic and scientific documents
+- **Educational**: Learning materials and textbooks
+- **Business**: Reports, proposals, and presentations
+- **Creative**: Marketing content and creative writing
 
 ## 🤝 Contributing
 
-This is a learning project! Feel free to:
-- Add support for more file formats
-- Improve the summarization prompts
-- Add new CLI commands
-- Create a web interface
-- Add tests and documentation
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- [Anthropic](https://docs.anthropic.com/en/docs/get-started) for the Claude API
-- [ChromaDB](https://www.trychroma.com/) for the vector database
-- [Rich](https://rich.readthedocs.io/) for beautiful terminal output
-- [Typer](https://typer.tiangolo.com/) for the CLI framework
+- **Anthropic** for Claude AI capabilities
+- **OpenAI** for GPT integration
+- **ChromaDB** for vector database functionality
+- **Inter Font** for beautiful typography
+- Modern UI/UX inspiration from leading design systems
+
+## 📞 Support
+
+- 📧 **Email**: [support@doc-whisperer.com](mailto:support@doc-whisperer.com)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/swilliams9772/local-doc-whisperer/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/swilliams9772/local-doc-whisperer/issues)
 
 ---
 
-**Happy hacking!** 🚀 In just a couple hundred lines of code, you'll have hands-on experience with the Anthropic SDK, long-context reasoning, and a privacy-respecting local knowledge base that you can grow at your own pace. 
+<p align="center">
+  <strong>Built with ❤️ and modern web technologies</strong><br>
+  <em>Bringing AI document analysis into 2025</em>
+</p> 
