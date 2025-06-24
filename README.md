@@ -8,6 +8,64 @@
 
 Doc-Whisperer is a cutting-edge document analysis platform that combines the power of AI language models (Claude & OpenAI) with a stunning modern web interface. Built with glassmorphism design principles and 2025 UI/UX trends, it offers an intuitive and beautiful way to interact with your documents.
 
+## 🎨 Visual Showcase
+
+### ✨ Modern Interface Design
+
+<table>
+<tr>
+<td align="center">
+<img src="assets/screenshots/dashboard-desktop.png" alt="Desktop Dashboard" width="400"/>
+<br/><strong>Desktop Interface</strong>
+<br/>Glassmorphism design with animated statistics
+</td>
+<td align="center">
+<img src="assets/screenshots/dashboard-mobile.png" alt="Mobile Dashboard" width="200"/>
+<br/><strong>Mobile Responsive</strong>
+<br/>Perfect adaptation to all screen sizes
+</td>
+</tr>
+</table>
+
+### 🎬 Live Demonstrations
+
+<table>
+<tr>
+<td align="center">
+<img src="assets/gifs/document-ingestion-flow.gif" alt="Document Ingestion Demo" width="400"/>
+<br/><strong>Document Ingestion Flow</strong>
+<br/>Smooth upload process with beautiful feedback
+</td>
+<td align="center">
+<img src="assets/gifs/qa-demo.gif" alt="Q&A Demo" width="400"/>
+<br/><strong>AI-Powered Q&A</strong>
+<br/>Interactive question answering with real-time responses
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td align="center">
+<img src="assets/gifs/hover-effects.gif" alt="Hover Effects Demo" width="300"/>
+<br/><strong>Micro-Interactions</strong>
+<br/>Smooth hover effects and transitions
+</td>
+<td align="center">
+<img src="assets/gifs/stats-animation.gif" alt="Statistics Animation" width="300"/>
+<br/><strong>Animated Statistics</strong>
+<br/>Live counting animations for engagement
+</td>
+<td align="center">
+<img src="assets/gifs/responsive-demo.gif" alt="Responsive Demo" width="300"/>
+<br/><strong>Responsive Design</strong>
+<br/>Seamless layout adaptation
+</td>
+</tr>
+</table>
+
+> 📸 **Note**: Screenshots and GIFs are being captured to showcase the beautiful interface. See [VISUAL_ASSETS_GUIDE.md](VISUAL_ASSETS_GUIDE.md) for detailed capture instructions.
+
 ## ✨ Key Features
 
 ### 🎨 **Modern 2025 UI/UX Design**
@@ -151,6 +209,16 @@ Choose from multiple analysis modes:
 - **Educational**: Learning materials and textbooks
 - **Business**: Reports, proposals, and presentations
 - **Creative**: Marketing content and creative writing
+
+## 📸 Contributing Visual Assets
+
+We welcome contributions of screenshots and demo GIFs! See our [Visual Assets Guide](VISUAL_ASSETS_GUIDE.md) for detailed instructions on capturing and optimizing visual content.
+
+### Quick Capture Checklist:
+- [ ] **Screenshots**: Dashboard, mobile view, forms, interactions
+- [ ] **GIFs**: Loading animations, user flows, hover effects
+- [ ] **Optimization**: Compress images and optimize GIF file sizes
+- [ ] **Naming**: Follow the established naming convention
 
 ## 🤝 Contributing
 
